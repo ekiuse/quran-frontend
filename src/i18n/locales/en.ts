@@ -8,7 +8,11 @@ export default {
         resetApp: "Reset App",
         darkMode: "Dark Mode",
         lightMode: "Light Mode",
-        back: "Back"
+        back: "Back",
+        search: "Search",
+        settings: "Settings",
+        comingSoon: "Coming soon...",
+
     },
 
     apps: {

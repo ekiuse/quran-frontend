@@ -1,10 +1,10 @@
 import React from "react"
 import ReactDOM from "react-dom/client"
+import "./lib/apiClient"
 import App from "./App"
 import "./style.css"
 import { registerSW } from "virtual:pwa-register"
 import "./i18n"
-
 
 document.addEventListener("wheel", (e) => {
   if (e.ctrlKey) e.preventDefault()
