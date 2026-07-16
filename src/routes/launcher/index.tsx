@@ -66,12 +66,12 @@ export default function Launcher() {
                 {t("launcher.links")}
               </h2>
 
+
               <div className="bg-surface-container p-6 rounded-3xl elevation-2 flex flex-col gap-3">
                 <SettingsLink
                   label={t("launcher.developer")}
                   href={import.meta.env.VITE_APP_DEV as string}
                 />
-
                 <SettingsLink
                   label={t("launcher.sponsor")}
                   href={import.meta.env.VITE_APP_SPONSOR as string}
@@ -81,6 +81,7 @@ export default function Launcher() {
                   label={t("launcher.blog")}
                   href={import.meta.env.VITE_APP_BLOG as string}
                 />
+
               </div>
             </div>
           </div>
@@ -105,8 +106,8 @@ export default function Launcher() {
           }
           active={tab === "settings"}
           onClick={() => setTab("settings")}
-        />
 
+        />
       </ResponsiveMenu>
     </div>
   );

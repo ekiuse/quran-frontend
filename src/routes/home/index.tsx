@@ -88,7 +88,6 @@ export default function Home() {
             <main className="md:ml-24 p-4">
                 {activeTab === "search" && (
                     <div className="max-w-xl mx-auto flex flex-col gap-4">
-                        {/* سرچ بار - مستقل از لیست */}
                         <div className="relative">
                             <Material
                                 icon="search"
@@ -103,7 +102,6 @@ export default function Home() {
                             />
                         </div>
 
-                        {/* لیست سوره‌ها */}
                         <Card className="rounded-2xl border-border/60 shadow-sm overflow-hidden py-0 gap-0">
                             <ScrollArea className="h-[65vh]">
                                 <CardContent className="p-2">
