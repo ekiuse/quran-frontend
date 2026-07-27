@@ -1,0 +1,17 @@
+.syncignore
+LICENSE
+README.md
+metadata.json
+package.json
+package-lock.json
+
+.env
+.env.example
+
+/public/*
+
+/src/*
+!/src/style.css
+!/src/components/*
+
+/src/contexts/settingsContext.tsx
