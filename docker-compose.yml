@@ -1,8 +1,8 @@
 services:
   frontend:
-    image: natiqquran/natiq-frontend:latest
+    image: natiqquran/quran-frontend:latest
 
-    container_name: natiq-frontend
+    container_name: quran-frontend
 
     restart: unless-stopped
 
