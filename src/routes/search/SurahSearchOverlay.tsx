@@ -90,7 +90,7 @@ export default function SurahSearchOverlay({
                                     const { primary, secondary } = getSurahNames(surah)
                                     return (
                                         <div
-                                            key={surah.uuid}
+                                            key={surah.id}
                                             className="flex items-center gap-3 rounded-xl px-3 py-3 hover:bg-accent transition-colors cursor-pointer"
                                             onClick={() => onSelect?.(surah)}
                                         >
