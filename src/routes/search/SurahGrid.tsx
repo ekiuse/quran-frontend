@@ -84,7 +84,7 @@ export default function SurahGrid({
 
                     return (
                         <Card
-                            key={surah.uuid}
+                            key={surah.id}
                             className="rounded-2xl border-border/60 shadow-sm hover:shadow-md hover:bg-accent/60 transition-all cursor-pointer py-0"
                             onClick={() => onSelect?.(surah)}
                         >
