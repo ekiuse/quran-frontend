@@ -29,15 +29,14 @@ export default function SurahSearchOverlay({
 }: SurahSearchOverlayProps) {
     const { t } = useTranslation()
     const [query, setQuery] = useState("")
-    const [expanded, setExpanded] = useState(false)
+    const [expandedByUser, setExpandedByUser] = useState(false)
 
     const filtered = useMemo(() => surahs.filter((s) => matchesQuery(s, query)), [surahs, query])
 
-    useEffect(() => {
-        setExpanded(false)
-    }, [query])
 
     const isOpen = query.trim().length > 0
+
+    const expanded = query.trim() === "" && expandedByUser
 
     useEffect(() => {
         onOpenChange?.(isOpen)
@@ -125,7 +124,7 @@ export default function SurahSearchOverlay({
                                             variant="ghost"
                                             size="sm"
                                             className="rounded-full"
-                                            onClick={() => setExpanded((v) => !v)}
+                                            onClick={() => setExpandedByUser((v) => !v)}
                                         >
                                             {expanded ? t("common.showLess") : t("common.showMore")}
                                         </Button>

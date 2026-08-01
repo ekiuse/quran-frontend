@@ -14,17 +14,39 @@ const PAGE_SIZE = 9
 function getSurahNames(surah: Surah): { primary: string; secondary?: string } {
     const names = surah.names as unknown
     if (Array.isArray(names) && names.length > 0) {
-        const first = names[0] as any
+        const first = names[0] as Record<string, unknown>
         return {
-            primary: first?.name ?? first?.text ?? `Surah ${surah.number}`,
-            secondary: first?.translation ?? first?.transliteration,
+            primary:
+                typeof first.name === "string"
+                    ? first.name
+                    : typeof first.text === "string"
+                        ? first.text
+                        : `Surah ${surah.number}`,
+
+            secondary:
+                typeof first.translation === "string"
+                    ? first.translation
+                    : typeof first.transliteration === "string"
+                        ? first.transliteration
+                        : undefined,
         }
     }
     if (names && typeof names === "object") {
-        const n = names as any
+        const n = names as Record<string, unknown>
         return {
-            primary: n.arabic ?? n.name ?? `Surah ${surah.number}`,
-            secondary: n.translation ?? n.transliteration,
+            primary:
+                typeof n.arabic === "string"
+                    ? n.arabic
+                    : typeof n.name === "string"
+                        ? n.name
+                        : `Surah ${surah.number}`,
+
+            secondary:
+                typeof n.translation === "string"
+                    ? n.translation
+                    : typeof n.transliteration === "string"
+                        ? n.transliteration
+                        : undefined,
         }
     }
     return { primary: `Surah ${surah.number}` }
