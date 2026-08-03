@@ -29,15 +29,12 @@ function RevelationBadge({ period }: { period: Surah["period"] }) {
 
     return (
         <div
-            className={`flex items-center justify-center h-7 w-7 rounded-full shrink-0 ${isMakki ? "bg-emerald-600" : "bg-sky-600"
-                }`}
-            title={isMakki ? "مکی" : "مدنی"}
+            className="flex items-center justify-center h-7 w-7 shrink-0 text-black dark:text-white [&_svg]:fill-current [&_svg_*]:fill-current"
         >
             <Symbol icon={isMakki ? "MakkahOutlined" : "MadinehOutlined"} filled />
         </div>
     )
 }
-
 export default function SurahGrid({
     surahs,
     loading,
