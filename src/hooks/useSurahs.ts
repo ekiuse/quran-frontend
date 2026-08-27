@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"
+import { filterArrayBySearch } from "@yakad/lib"
 import { getSurahs } from "@/api/surahs"
 import type { Surah } from "@ntq/sdk"
 
@@ -44,46 +45,14 @@ export function getSurahNames(surah: Surah): { primary: string; secondary?: stri
     return { primary: `Surah ${surah.number}` }
 }
 
-// Flattens EVERY language variant returned for a surah (arabic name,
-// per-locale translation, transliteration, etc.) into a single lowercase
-// list, so search works no matter which language the user types in.
-function getAllSearchableStrings(surah: Surah): string[] {
-    const values: string[] = []
-    const names = surah.names as unknown
+// Uses @yakad/lib's filterArrayBySearch, which already normalizes Arabic/
+// Persian letter variants, strips diacritics, and converts Persian/Arabic
+// digits to English before comparing — so search works across languages
+// and input methods without any extra logic here.
+export function filterSurahs(surahs: Surah[], query: string): Surah[] {
+    if (!query.trim()) return surahs
 
-    const pushIfString = (v: unknown) => {
-        if (typeof v === "string" && v.trim()) values.push(v.toLowerCase())
-    }
-
-    if (Array.isArray(names)) {
-        for (const entry of names) {
-            if (!entry || typeof entry !== "object") continue
-            const e = entry as Record<string, unknown>
-            pushIfString(e.name)
-            pushIfString(e.text)
-            pushIfString(e.arabic)
-            pushIfString(e.translation)
-            pushIfString(e.transliteration)
-        }
-    } else if (names && typeof names === "object") {
-        const n = names as Record<string, unknown>
-        pushIfString(n.arabic)
-        pushIfString(n.name)
-        pushIfString(n.translation)
-        pushIfString(n.transliteration)
-    }
-
-    return values
-}
-
-export function matchesQuery(surah: Surah, query: string): boolean {
-    const q = query.trim().toLowerCase()
-    if (!q) return true
-
-    // allow matching by surah number (e.g. "2" or "36")
-    if (surah.number.toString().includes(q)) return true
-
-    return getAllSearchableStrings(surah).some((value) => value.includes(q))
+    return filterArrayBySearch(surahs, query, ["number", "names", "period"])
 }
 
 export function useAllSurahs(mushaf: string) {

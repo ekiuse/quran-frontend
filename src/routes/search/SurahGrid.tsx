@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Skeleton } from "@/components/ui/skeleton"
-import { getSurahNames, matchesQuery } from "@/hooks/useSurahs"
+import { getSurahNames, filterSurahs } from "@/hooks/useSurahs"
 import { Symbol } from "@yakad/symbols"
 import type { Surah } from "@ntq/sdk"
 
@@ -38,10 +38,7 @@ export default function SurahGrid({
 }: SurahGridProps) {
     const { t } = useTranslation()
 
-    const filtered = useMemo(
-        () => surahs.filter((s) => matchesQuery(s, query)),
-        [surahs, query]
-    )
+    const filtered = useMemo(() => filterSurahs(surahs, query), [surahs, query])
 
     if (loading) {
         return (
